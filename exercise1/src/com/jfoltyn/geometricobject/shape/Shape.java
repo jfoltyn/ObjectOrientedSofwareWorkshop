@@ -1,16 +1,17 @@
-package com.jfoltyn.shapes;
+package com.jfoltyn.geometricobject.shape;
+
+import com.jfoltyn.geometricobject.GeometricObject;
+import com.jfoltyn.geometricobject.PointXY;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Supplier;
 
 import static java.lang.Math.abs;
 
 public abstract class Shape extends GeometricObject {
 
-   protected List<PointXY> points;
-
-   private Supplier<Double> calculationSupplier = () -> {
+   @Override
+   public double calculate() {
       List<PointXY> points = new ArrayList<>(getPoints());
       points.add(points.get(0));
       double area = 0;
@@ -20,15 +21,7 @@ public abstract class Shape extends GeometricObject {
       }
 
       return abs(area / 2);
-   };
-
-
-   @Override
-   Supplier<Double> provideCalculationSupplier() {
-      return calculationSupplier;
    }
 
-   public List<PointXY> getPoints(){
-      return points;
-   }
+   public abstract List<PointXY> getPoints();
 }
